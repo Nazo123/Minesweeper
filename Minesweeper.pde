@@ -28,16 +28,12 @@ int nowMs, gameTimeSec;
 void setup() {
   // 1. Use size(width, height) to set the width and height of the window
   // Example: size(400, 440)
-  size(400, 440);
   
   // 2. Use the initializeGameData() function to set up the game header
-  initializeGameData();
   
   // 3. Use the initializeCells() function to set up the playing grid cells
-  initializeCells();
   
   // 4. Use the initializeMines() function to randomly place the mines
-  initializeMines();
 }
 
 /*
@@ -45,25 +41,20 @@ void setup() {
  */
 void draw() {
   // 5. Use an 'if' statement to check if game_read is set to true
-  if( gameReady ){
     
     // 6. Use background(color) to set the game's background
     // Do you see your color when you run the code?
-    background(255);
     
     // 7. Use the drawGameHeader() function to draw the game's header
     // Skip down and complete the drawGameHeader() function
-    drawGameHeader();
     
     // 11. Complete the instructions in drawGameHeader() FIRST!
     // Use the drawCells() function to draw the game's grid cells
     //Skip down and complete the drawCells() function
-    drawCells();
     
     // 14. Use the updateGameTime() function to count the game seconds
     // when the game starts.
     // Does the game start counting up the seconds when the start button is pressed?
-    updateGameTime();
     
     // *** ENHANCEMENTS ***
     // * Changing the game background color?
@@ -71,7 +62,7 @@ void draw() {
     // * Adding difficulty modes that change the game's window size
     //   and number of mines.
     // * Changing the mine and flag images to something more fun!
-  }
+
 }
 
 /*
@@ -84,22 +75,13 @@ void drawGameHeader(){
   //    - mines_flagged variable holds the number of mines that have been flagged
   //    - Use fill(color) to change the text color
   //    - Use textSize(int_size) to change the size of the text
-  textSize(48);
-  fill(0);
-  
-  if( numOfMines - minesFlagged > 0 ){ 
-    text( (numOfMines - minesFlagged), 5, cellWidth - 5 );
-  } else {
-    text( "0", 5, cellWidth - 5);
-  }
   
   // 9. Use the text("my text", x, y) function to draw the game time
   //    - game_time_sec variable holds the number of seconds since the game started
-  text( gameTimeSec, width - 100, cellWidth - 5 );
   
-  // 10. Call draw() from the start_button to draw the start button
+  // 10. Call draw() from the startButton to draw the start button
   // Do you see the start button, mines left, and game timer?
-  startButton.draw();
+  
 }
 
 /*
@@ -138,6 +120,10 @@ void initializeCells(){
       cells.add(c);
     }
   }
+}
+
+void startGameTimer(){
+ nowMs = millis(); 
 }
 
 /*
@@ -302,6 +288,7 @@ void mousePressed() {
     initializeGameData();
     initializeCells();
     initializeMines();
+    startGameTimer();
     gameInProgress = true;
     return;
   }
