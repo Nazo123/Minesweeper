@@ -27,6 +27,7 @@ int nowMs, gameTimeSec;
  */
 void setup() {
   // 1. Use size(width, height) to set the width and height of the window
+  // Example: size(400, 440)
   size(400, 440);
   
   // 2. Use the initializeGameData() function to set up the game header
@@ -51,12 +52,12 @@ void draw() {
     background(255);
     
     // 7. Use the drawGameHeader() function to draw the game's header
-    // Skip down and complete the draw_game_header() function
+    // Skip down and complete the drawGameHeader() function
     drawGameHeader();
     
     // 11. Complete the instructions in drawGameHeader() FIRST!
     // Use the drawCells() function to draw the game's grid cells
-    //Skip down and complete the draw_cells() function
+    //Skip down and complete the drawCells() function
     drawCells();
     
     // 14. Use the updateGameTime() function to count the game seconds
@@ -70,44 +71,6 @@ void draw() {
     // * Adding difficulty modes that change the game's window size
     //   and number of mines.
     // * Changing the mine and flag images to something more fun!
-  }
-}
-
-/*
- * Setup cells, place mines, start game timer
- */
-void initializeGameData(){
-  // Don't use height becuase it includes the game header
-  rows = width / cellWidth;
-  
-  initializeImages();
-  gameTimeSec = 0;
-  
-  if( startButton == null ){
-    startButton = new Button("start", (width / 2) - 50, 0, 100, cellWidth);
-  }
-}
-
-void initializeCells(){
-  cells.clear();
-  
-  for( int i = 0; i < rows; i++ ) {
-    for (int j = 0; j < rows; j++) {
-      Cell c = new Cell(i, j);
-      cells.add(c);
-    }
-  }
-}
-
-/*
- * Tracks game timer ~1 sec increments
- */
-void updateGameTime(){
-  if( gameInProgress ){
-    if(millis() > nowMs + 1000) {
-      gameTimeSec++;
-      nowMs = millis();
-    }
   }
 }
 
@@ -148,6 +111,44 @@ void drawCells(){
     // 13. Call each cell's draw() method
     // Do you see the grid of cells?
     c.draw();
+  }
+}
+
+/*
+ * Setup cells, place mines, start game timer
+ */
+void initializeGameData(){
+  // Don't use height becuase it includes the game header
+  rows = width / cellWidth;
+  
+  initializeImages();
+  gameTimeSec = 0;
+  
+  if( startButton == null ){
+    startButton = new Button("start", (width / 2) - 50, 0, 100, cellWidth);
+  }
+}
+
+void initializeCells(){
+  cells.clear();
+  
+  for( int i = 0; i < rows; i++ ) {
+    for (int j = 0; j < rows; j++) {
+      Cell c = new Cell(i, j);
+      cells.add(c);
+    }
+  }
+}
+
+/*
+ * Tracks game timer ~1 sec increments
+ */
+void updateGameTime(){
+  if( gameInProgress ){
+    if(millis() > nowMs + 1000) {
+      gameTimeSec++;
+      nowMs = millis();
+    }
   }
 }
 
