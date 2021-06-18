@@ -291,6 +291,8 @@ void mousePressed() {
     startGameTimer();
     gameInProgress = true;
     return;
+  } else if( !gameInProgress ){
+    return;
   }
   
   Cell cell = checkCellPressed();
