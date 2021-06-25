@@ -2,9 +2,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 // Game settings
-int cellWidth = 40;            // in pixels
+int cellWidth = 35;            // in pixels
 int headerHeight = cellWidth;  // height of game info header
-int numOfMines = 10;           // number of mines in the game
+int numOfMines = 40;           // number of mines in the game
 int minesFlagged = 0;          // number of mines flagged
 color cellColor = #C0C0C0;     // color of unrevealed cell
 
@@ -28,12 +28,13 @@ int nowMs, gameTimeSec;
 void setup() {
   // 1. Use size(width, height) to set the width and height of the window
   // Example: size(400, 440)
-  
+  size(700,740);
   // 2. Use the initializeGameData() function to set up the game header
-  
+  initializeGameData();
   // 3. Use the initializeCells() function to set up the playing grid cells
-  
+  initializeCells();
   // 4. Use the initializeMines() function to randomly place the mines
+initializeMines();
 }
 
 /*
@@ -41,18 +42,20 @@ void setup() {
  */
 void draw() {
   // 5. Use an 'if' statement to check if game_read is set to true
-    
+    if(gameReady){
     // 6. Use background(color) to set the game's background
     // Do you see your color when you run the code?
-    
+    background(#d3d3d3);
     // 7. Use the drawGameHeader() function to draw the game's header
     // Skip down and complete the drawGameHeader() function
-    
+    drawGameHeader();
     // 11. Complete the instructions in drawGameHeader() FIRST!
     // Use the drawCells() function to draw the game's grid cells
+    drawCells();
     //Skip down and complete the drawCells() function
     
     // 14. Use the updateGameTime() function to count the game seconds
+    updateGameTime();
     // when the game starts.
     // Does the game start counting up the seconds when the start button is pressed?
     
@@ -62,7 +65,7 @@ void draw() {
     // * Adding difficulty modes that change the game's window size
     //   and number of mines.
     // * Changing the mine and flag images to something more fun!
-
+    }
 }
 
 /*
@@ -72,14 +75,18 @@ void drawGameHeader(){
   // 8. Use the text("my text", x, y) function to draw the remaining number
   // of mines at the top of window
   //    - num_of_mines variable holds the total number of mines in the game
+  fill(0,0,0);
+  textSize(30);
+  text((numOfMines-minesFlagged)+" mines left",450, 30);
   //    - mines_flagged variable holds the number of mines that have been flagged
   //    - Use fill(color) to change the text color
   //    - Use textSize(int_size) to change the size of the text
-  
+  text("Time Spent: "+gameTimeSec, 20, 30);
   // 9. Use the text("my text", x, y) function to draw the game time
   //    - game_time_sec variable holds the number of seconds since the game started
   
   // 10. Call draw() from the startButton to draw the start button
+  startButton.draw();
   // Do you see the start button, mines left, and game timer?
   
 }
@@ -107,7 +114,7 @@ void initializeGameData(){
   gameTimeSec = 0;
   
   if( startButton == null ){
-    startButton = new Button("start", (width / 2) - 50, 0, 100, cellWidth);
+    startButton = new Button("Start", (width / 2) -75, 0, 100, cellWidth);
   }
 }
 
